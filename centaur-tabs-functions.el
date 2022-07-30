@@ -1252,26 +1252,26 @@ first."
 
 ;;; Buffer grouping and tab hiding
 ;;
-;; (defun centaur-tabs-project-name ()
-;;   "Get project name for tabs."
-;;   (let ((project-name (cdr (project-current))))
-;;     (if project-name
-;; 	(format "Project: %s" (expand-file-name project-name))
-;;       centaur-tabs-common-group-name)))
+(defun centaur-tabs-project-name ()
+  "Get project name for tabs."
+  (let ((project-name (nth 2 (project-current))))
+    (if project-name
+	(format "Project: %s" (expand-file-name project-name))
+      centaur-tabs-common-group-name)))
 
 ;; hlissners doom-emacs fix, see
 ;; https://github.com/doomemacs/doomemacs/commit/8b93e8b15cc081860a8eb156b1584ef60b6bc9e4
-(defun centaur-tabs-project-name ()
-    (let ((project-name (cdr (project-current))))
-      ;; In earlier versions of project.el, `project-current' returned a cons
-      ;; cell (VCBACKEND . PROJECTROOT). In more recent versions it returns
-      ;; (TYPE VCBACKEND PROJECTROOT), which throws an error.
-      ;; REVIEW This should be upstreamed.
-      (when (listp project-name)
-        (setq project-name (cadr project-name)))
-      (if project-name
-          (format "Project: %s" (expand-file-name project-name))
-        centaur-tabs-common-group-name)))
+;; (defun centaur-tabs-project-name ()
+;;     (let ((project-name (cdr (project-current))))
+;;       ;; In earlier versions of project.el, `project-current' returned a cons
+;;       ;; cell (VCBACKEND . PROJECTROOT). In more recent versions it returns
+;;       ;; (TYPE VCBACKEND PROJECTROOT), which throws an error.
+;;       ;; REVIEW This should be upstreamed.
+;;       (when (listp project-name)
+;;         (setq project-name (cadr project-name)))
+;;       (if project-name
+;;           (format "Project: %s" (expand-file-name project-name))
+;;         centaur-tabs-common-group-name)))
 
 
 ;; Rules to control buffer's group rules.
